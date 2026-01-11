@@ -1,0 +1,5 @@
+# A robot cannot be both in two rooms
+:- in_room(X, R1), in_room(X, R2), R1 != R2.
+
+# Fire and intrusion cannot happen simultaneously in same room (example)
+:- fire(X), intrusion(X).

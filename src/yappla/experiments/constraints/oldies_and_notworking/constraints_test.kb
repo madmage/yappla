@@ -1,0 +1,13 @@
+# Facts
+robot(r1).
+robot(r2).
+
+# Rules
+mobile(X) :- robot(X).
+
+# Domain constraints
+X1 in 1..3
+X2 in {red, green, blue}
+
+# Disequalities
+:- X1 != X3

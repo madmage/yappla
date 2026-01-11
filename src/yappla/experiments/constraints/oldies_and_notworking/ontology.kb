@@ -1,0 +1,13 @@
+# Types
+robot(r1).
+robot(r2).
+
+location(room1).
+location(room2).
+
+# Structural relations
+in_room(r1, room1).
+in_room(r2, room2).
+
+# Ontological rules (definitions)
+mobile(X) :- robot(X).

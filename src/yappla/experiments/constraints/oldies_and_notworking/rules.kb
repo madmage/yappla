@@ -1,0 +1,8 @@
+# Causal rules
+alarm(X) :- fire(X).
+alarm(X) :- intrusion(X).
+
+smoke(X) :- fire(X).
+
+# Derived behavioral state
+danger(X) :- alarm(X).
