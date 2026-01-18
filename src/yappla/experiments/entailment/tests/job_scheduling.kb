@@ -1,0 +1,90 @@
+% Job Scheduling Domain
+% Demonstrates constraint satisfaction and optimization with labeling
+
+% Jobs
+job(task1)
+job(task2)
+job(task3)
+job(task4)
+
+% Resources
+resource(cpu)
+resource(memory)
+resource(disk)
+
+% Job properties
+duration(task1, 2)
+duration(task2, 3)
+duration(task3, 1)
+duration(task4, 2)
+
+priority(task1, 5)
+priority(task2, 3)
+priority(task3, 4)
+priority(task4, 2)
+
+% Resource requirements
+requires(task1, cpu)
+requires(task1, memory)
+requires(task2, cpu)
+requires(task2, disk)
+requires(task3, memory)
+requires(task3, disk)
+requires(task4, cpu)
+
+% Available resource quantities (in units)
+available(cpu, 2)
+available(memory, 3)
+available(disk, 2)
+
+% Time slots (0-10)
+time_slot(0)
+time_slot(1)
+time_slot(2)
+time_slot(3)
+time_slot(4)
+time_slot(5)
+time_slot(6)
+time_slot(7)
+time_slot(8)
+time_slot(9)
+time_slot(10)
+
+% Machines
+machine(m1)
+machine(m2)
+machine(m3)
+
+% Machine capabilities
+capable(m1, cpu)
+capable(m1, memory)
+capable(m2, cpu)
+capable(m2, disk)
+capable(m3, memory)
+capable(m3, disk)
+
+% --- Constraint and Labeling Examples ---
+
+% Task scheduling: each task assigned to time slot and machine
+scheduled(Task, Slot, Machine) :- job(Task), time_slot(Slot), machine(Machine), Slot in 0..5, Machine in {m1, m2, m3}
+
+% Non-overlapping constraint: two tasks cannot use same machine at same time
+no_conflict(T1, T2, M) :- job(T1), job(T2), machine(M), T1 != T2
+
+% Valid assignment: machine must have required resources
+valid_assignment(Task, Machine) :- job(Task), machine(Machine), requires(Task, Resource), capable(Machine, Resource)
+
+% Example queries:
+% ENTAIL scheduled(task1, Slot, Machine)
+% ENTAIL requires(Task, cpu)
+% ENTAIL capable(m1, Resource)
+%
+% Labeling example (pseudo-code):
+% LABELING S1, S2, S3, S4 SUBJECT TO
+%   job(task1), S1 in 0..5,
+%   job(task2), S2 in 0..5,
+%   job(task3), S3 in 0..5,
+%   job(task4), S4 in 0..5,
+%   S1 != S2, S1 != S3, S1 != S4,
+%   S2 != S3, S2 != S4, S3 != S4,
+%   MINIMIZE total_time

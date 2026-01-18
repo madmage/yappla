@@ -1,0 +1,42 @@
+% University Domain
+% Demonstrates: Complex facts, multiple rule types, and various queries
+
+% Students
+student(alice)
+student(bob)
+student(charlie)
+student(diana)
+
+% Courses
+course(algorithms)
+course(databases)
+course(ai)
+course(graphics)
+
+% Enrollment
+enrolled(alice, algorithms)
+enrolled(bob, databases)
+enrolled(charlie, graphics)
+enrolled(diana, databases)
+enrolled(diana, graphics)
+
+% Instructors
+instructor(dr_smith, algorithms)
+instructor(dr_smith, ai)
+instructor(dr_jones, databases)
+instructor(dr_wilson, graphics)
+
+% Rules: Derived knowledge
+takes_course(S, C) :- enrolled(S, C)
+taught_by(C, I) :- instructor(I, C)
+student_of(S, I) :- enrolled(S, C), instructor(I, C)
+
+% Meta-properties
+active_course(C) :- course(C), enrolled(S, C)
+popular_course(C) :- course(C), enrolled(S1, C), enrolled(S2, C), S1 != S2
+
+% Example queries:
+% ENTAIL student(alice)
+% ENTAIL enrolled(alice, algorithms)
+% ENTAIL student_of(alice, dr_smith)
+% ENTAIL taught_by(algorithms, dr_smith)

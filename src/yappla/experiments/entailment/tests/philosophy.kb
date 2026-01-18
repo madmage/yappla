@@ -1,0 +1,41 @@
+% Knowledge Base Domain (Meta-domain about logic itself)
+% Demonstrates: Self-referential rules, conditionals, and complex inference
+
+% Facts about propositions
+proposition(socrates_mortal)
+proposition(socrates_human)
+proposition(all_humans_mortal)
+
+% Base facts: Classical syllogism
+human(socrates)
+mortal_if_human(X) :- human(X)
+
+% Rules: Types and inheritance
+has_type(socrates, human)
+has_type(plato, human)
+has_type(aristotle, human)
+
+% Philosophical rules
+philosopher(socrates)
+philosopher(plato)
+philosopher(aristotle)
+
+% Rules about philosophers
+ancient_philosopher(X) :- philosopher(X)
+mortal(X) :- has_type(X, human)
+logical_entity(X) :- has_type(X, human)
+
+% Derived facts
+known_person(X) :- philosopher(X)
+historical_figure(X) :- ancient_philosopher(X)
+
+% Meta reasoning
+entity(X) :- human(X)
+entity(X) :- philosopher(X)
+
+% Example queries:
+% ENTAIL human(socrates)
+% ENTAIL mortal(socrates)
+% ENTAIL philosopher(socrates)
+% ENTAIL entity(socrates)
+% ENTAIL known_person(plato)

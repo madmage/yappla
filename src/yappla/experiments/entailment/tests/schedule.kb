@@ -1,0 +1,60 @@
+% Schedule Domain Example
+% Demonstrates domain constraints with both range and set forms
+
+% Days of the week
+day(monday)
+day(tuesday)
+day(wednesday)
+day(thursday)
+day(friday)
+
+% Rooms available
+room(101)
+room(102)
+room(103)
+room(104)
+room(105)
+
+% Courses
+course(math)
+course(physics)
+course(history)
+course(art)
+
+% Time slots (using 24-hour format, 0-23)
+time_slot(0)
+time_slot(1)
+time_slot(2)
+time_slot(3)
+
+% Professors
+professor(alice)
+professor(bob)
+professor(charlie)
+
+% Current scheduling constraints and facts
+teaches(alice, math)
+teaches(bob, physics)
+teaches(charlie, history)
+
+% --- Domain Constraints Examples ---
+
+% Valid schedule: specific days and rooms available for courses
+schedule_valid(C) :- course(C), C in {math, physics}, D in {monday, wednesday, friday}
+
+% Restricted time slots: only early hours allowed
+early_slot(S) :- time_slot(S), S in 0..3
+
+% Room availability: courses can only use certain rooms
+available_room(C, R) :- course(C), room(R), C in {math, physics}, R in 1..3
+
+% Professor scheduling: specific days and rooms
+prof_schedule(P, D, R) :- professor(P), day(D), room(R), D in {tuesday, thursday}, R in {101, 102, 103}, P in {alice, bob}
+
+% Complex scheduling with multiple constraints
+optimal_schedule(P, C, D, T) :- professor(P), course(C), day(D), time_slot(T), teaches(P, C), D in {monday, wednesday, friday}, T in 1..4, P in {alice, bob, charlie}
+
+% Example queries:
+% ENTAIL early_slot(S)
+% ENTAIL available_room(math, R)
+% ENTAIL prof_schedule(alice, D, R)

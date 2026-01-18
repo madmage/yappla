@@ -1,0 +1,28 @@
+% Robot Domain with Constraints
+% Demonstrates: Facts, rules, and DomainConstraint
+
+% Robot facts
+robot(r1)
+robot(r2)
+robot(r3)
+robot(r4)
+
+% Location facts
+location(r1, warehouse)
+location(r2, factory)
+location(r3, office)
+location(r4, storage)
+
+% Note: Rules with DomainConstraint would need to be added via BEGIN KB/END KB
+% Since we don't have direct constraint syntax in the file format,
+% we define regular rules here and constraints can be tested via REPL
+
+% Rules: Basic derivations
+operational(X) :- robot(X), location(X, Y)
+available(X) :- robot(X)
+in_warehouse(X) :- location(X, warehouse)
+
+% Example query suggestions:
+% ENTAIL operational(r1)
+% ENTAIL in_warehouse(r1)
+% ENTAIL robot(r2)

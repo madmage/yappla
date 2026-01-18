@@ -1,0 +1,18 @@
+% Family Relationships Test Domain
+% Demonstrates: Basic facts, rules, and transitive reasoning
+
+% Facts: Direct parent relationships
+parent(tom, bob)
+parent(tom, liz)
+parent(bob, ann)
+parent(bob, pat)
+parent(pat, jim)
+
+% Rules: Derived relationships
+grandparent(X, Z) :- parent(X, Y), parent(Y, Z)
+greatgrandparent(X, W) :- parent(X, Y), grandparent(Y, W)
+ancestor(X, Y) :- parent(X, Y)
+ancestor(X, Z) :- parent(X, Y), ancestor(Y, Z)
+sibling(X, Y) :- parent(P, X), parent(P, Y)
+brother(X, Y) :- sibling(X, Y)
+cousin(X, Y) :- parent(P1, X), parent(P2, Y), sibling(P1, P2)

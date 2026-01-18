@@ -1,0 +1,6 @@
+- check that general constraints in the form `:- atom1(arg1), atom2(arg2)` work
+- always terminate facts and rules with a dot (while loading from file and while entering through the REPL)
+- when facts and rules are not terminated, they continue on the next line
+- create a new command called LABELING or similar, to include the labeling code, create tests for this
+V check why the constraint with the `!=` does not work on the university.kb example
+V also allow the parser to parse domain constraint in both 1..3 form and in {one, two, three} form

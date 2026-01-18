@@ -1,0 +1,28 @@
+% Graph Traversal Domain
+% Demonstrates: Facts, rules, and path finding through transitive closure
+
+% Graph edges
+edge(a, b)
+edge(b, c)
+edge(c, d)
+edge(d, e)
+edge(a, f)
+edge(f, g)
+edge(g, e)
+
+% Path finding rules
+path(X, Y) :- edge(X, Y)
+path(X, Z) :- edge(X, Y), path(Y, Z)
+
+% Connected component
+connected(X, Y) :- path(X, Y)
+connected(X, Y) :- path(Y, X)
+
+% Graph properties
+reachable_from(start, X) :- connected(start, X)
+
+% Example queries:
+% ENTAIL edge(a, b)
+% ENTAIL path(a, c)
+% ENTAIL path(a, e)
+% ENTAIL connected(a, e)
