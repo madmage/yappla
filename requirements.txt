@@ -1,0 +1,12 @@
+# Core production dependencies for YAPPLA
+# Install with: pip install -r requirements.txt
+#
+# For development: pip install -r requirements-dev.txt
+# Or: pip install -e ".[dev,docs]"
+
+# Core dependencies
+simpleeval
+
+# Optional: unified-planning support
+# Uncomment below if you need Unified Planning integration:
+# unified-planning>=0.7.0

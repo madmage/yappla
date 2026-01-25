@@ -1,0 +1,101 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel", "setuptools-scm[toml]>=7"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yappla"
+version = "0.0.3"
+description = "YAPPLA = Yet Another Probabilistic Planning and Logic Architecture. Core library with unified_planning interface (up_yappla)"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Daniele Calisi", email = "daniele.calisi@gmail.com" }
+]
+keywords = ["planning", "automated-planning", "dijkstra", "state-space-search"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = ["simpleeval"]
+
+[project.optional-dependencies]
+unified-planning = ["unified-planning>=0.7.0"]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "isort>=5.0",
+    "mypy>=1.0",
+]
+docs = [
+    "sphinx>=5.0",
+    "sphinx-rtd-theme>=1.0",
+    "sphinx-autodoc-typehints>=1.20",
+    "myst-parser>=0.18",
+]
+
+[project.urls]
+Homepage = "https://github.com/madmage/yappla"
+Documentation = "https://yappla.readthedocs.io"
+Repository = "https://github.com/madmage/yappla.git"
+Issues = "https://github.com/madmage/yappla/issues"
+
+[tool.setuptools]
+packages = ["yappla", "up_yappla"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--verbose --cov=src/yappla --cov=src/up_yappla --cov-report=term-missing"
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.coverage.run]
+source = ["src/yappla", "src/up_yappla"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_mode = 3
+include_trailing_comma = true
+
+[tool.mypy]
+python_version = "3.8"
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+
+[tool.setuptools.dynamic]
+version = { attr = "yappla.__version__" }

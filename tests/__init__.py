@@ -1,0 +1,1 @@
+"""YAPPLA tests package."""

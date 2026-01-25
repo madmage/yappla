@@ -1,0 +1,16 @@
+# Development and testing dependencies
+pytest>=7.0
+pytest-cov>=4.0
+black>=23.0
+flake8>=6.0
+isort>=5.0
+mypy>=1.0
+
+# Documentation dependencies
+sphinx>=5.0
+sphinx-rtd-theme>=1.0
+sphinx-autodoc-typehints>=1.20
+myst-parser>=0.18
+
+# Optional: Unified Planning support
+unified-planning>=0.7.0
